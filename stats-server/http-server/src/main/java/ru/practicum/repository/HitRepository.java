@@ -11,12 +11,12 @@ import java.util.List;
 
 public interface HitRepository extends JpaRepository<Hit, Long> {
 
-    @Query("select new ru.practicum.dto.StatDto(h.app, h.uri, COUNT (h.ip)) " +
+    @Query("select new ru.practicum.dto.StatDto(h.app, h.uri, COUNT(h.ip) ) " +
             "from Hit as h " +
             "where h.timestamp >= ?1 " +
             "and h.timestamp <= ?2 " +
             "group by h.app, h.uri " +
-            "order by count (h.ip) desc")
+            "order by COUNT(h.ip) desc")
     List<StatDto> getStatsAllUrisAndNotUniqueIp(LocalDateTime start, LocalDateTime end);
 
     @Query("select new ru.practicum.dto.StatDto(h.app, h.uri, COUNT(DISTINCT h.ip)) " +
@@ -27,7 +27,7 @@ public interface HitRepository extends JpaRepository<Hit, Long> {
             "order by count (h.ip) desc")
     List<StatDto> getStatsAllUrisAndUniqueIp(LocalDateTime start, LocalDateTime end);
 
-    @Query("select new ru.practicum.dto.StatDto(h.app, h.uri, COUNT(DISTINCT h.ip)) " +
+    @Query("select new ru.practicum.dto.StatDto(h.app, h.uri, COUNT(h.ip)) " +
             "from Hit as h " +
             "where h.timestamp >= ?1 " +
             "and h.timestamp <= ?2 " +
