@@ -24,7 +24,7 @@ public interface HitRepository extends JpaRepository<Hit, Long> {
             "where h.timestamp >= ?1 " +
             "and h.timestamp <= ?2 " +
             "group by h.app, h.uri " +
-            "order by count (h.ip) desc")
+            "order by count(DISTINCT h.ip) desc")
     List<StatDto> getStatsAllUrisAndUniqueIp(LocalDateTime start, LocalDateTime end);
 
     @Query("select new ru.practicum.dto.StatDto(h.app, h.uri, COUNT(h.ip)) " +
@@ -42,6 +42,6 @@ public interface HitRepository extends JpaRepository<Hit, Long> {
             "and h.timestamp <= ?2 " +
             "and h.uri in ?3 " +
             "group by h.app, h.uri " +
-            "order by count (h.ip) desc")
+            "order by count (DISTINCT h.ip) desc")
     List<StatDto> getStatsUrisAndUniqueIp(LocalDateTime start, LocalDateTime end, List<String> uris);
 }

@@ -2,6 +2,7 @@ package ru.practicum.controller;
 
 
 import com.sun.istack.NotNull;
+import org.springframework.http.HttpStatus;
 import ru.practicum.dto.HitDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,8 @@ public class HitController {
 
     @PostMapping("/hit")
     private ResponseEntity<Object> postHit(@Validated @RequestBody HitDto hitDto) {
-        return service.createHit(hitDto);
+        service.createHit(hitDto);
+        return new ResponseEntity<>("Информация сохранена", HttpStatus.CREATED);
     }
 
     @GetMapping("/hit")
@@ -36,7 +38,7 @@ public class HitController {
                                          @RequestParam(defaultValue = "") List<String> uris,
                                          @RequestParam(defaultValue = "false") Boolean unique) {
         log.info("Запрос статистики.");
-        return service.getStats(start, end, uris, unique);
+        return new ResponseEntity<>(service.getStats(start, end, uris, unique), HttpStatus.OK);
     }
 
 

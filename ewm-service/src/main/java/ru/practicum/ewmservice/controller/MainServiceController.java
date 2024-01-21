@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainServiceController {
     @GetMapping("/server")
-    public ResponseEntity<Object> getHit() {
+    public ResponseEntity<Object> getNice() {
         return new ResponseEntity<>("Ответ.", HttpStatus.OK);
     }
 }
