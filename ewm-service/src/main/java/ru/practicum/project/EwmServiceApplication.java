@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class EwmServiceApplication {
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(EwmServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EwmServiceApplication.class, args);
+    }
 }
