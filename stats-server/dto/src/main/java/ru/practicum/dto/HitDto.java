@@ -4,6 +4,7 @@ package ru.practicum.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 @Data
 @Builder
