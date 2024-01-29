@@ -12,6 +12,7 @@ import java.util.Map;
 public class BaseClient {
 
     private final RestTemplate rest;
+
     public BaseClient(RestTemplate rest) {
         this.rest = rest;
     }
