@@ -2,6 +2,10 @@ package ru.practicum.project.users.model;
 
 
 public final class UserMapper {
+
+    private UserMapper() {
+    }
+
     public static User toUser(NewUserRequest newUserRequest) {
         return User.builder()
                 .name(newUserRequest.getName())

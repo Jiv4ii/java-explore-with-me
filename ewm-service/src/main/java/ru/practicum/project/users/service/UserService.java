@@ -35,7 +35,7 @@ public class UserService {
         throw new DuplicateEmailException("Пользователь с данным email уже существует");
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<UserDto> getUsers(Long[] ids, int from, int size) {
         if (ids != null) {
             log.info("Список пользователей получен");
@@ -52,7 +52,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public User getUserById(Long userId) {
         checkExistsUser(userId);
         log.info("Пользователь успешно получен");

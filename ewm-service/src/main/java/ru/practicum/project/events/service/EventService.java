@@ -68,6 +68,7 @@ public class EventService {
         return EventMapper.toEventFullDto(repository.save(event));
     }
 
+    @Transactional(readOnly = true)
     public List<EventFullDto> getEvents() {
         return repository.findAll()
                 .stream()
@@ -172,9 +173,9 @@ public class EventService {
             if (updateEventUserRequest.getEventDate().isBefore(LocalDateTime.now().plusHours(2))) {
                 log.info("Время начала события задано неверно");
                 throw new DateTimeException("Время начала события задано неверно");
-            } else {
-                event.setEventDate(updateEventUserRequest.getEventDate());
             }
+            event.setEventDate(updateEventUserRequest.getEventDate());
+
         }
 
         if (updateEventUserRequest.getLocation() != null) {
@@ -213,6 +214,7 @@ public class EventService {
 
     }
 
+    @Transactional(readOnly = true)
     public List<EventShortDto> getUserEvents(long userId, int from, int size) {
 
         Pageable pageable = PageRequest.of(from, size);
@@ -228,12 +230,14 @@ public class EventService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Event getEventById(long eventId) {
         checkExistsEvent(eventId);
 
         return repository.getReferenceById(eventId);
     }
 
+    @Transactional(readOnly = true)
     public EventFullDto getEventDtoById(long eventId, HttpServletRequest request) {
         checkExistsEvent(eventId);
         Event event = repository.getReferenceById(eventId);
@@ -254,6 +258,7 @@ public class EventService {
         return EventMapper.toEventFullDto(repository.getReferenceById(eventId));
     }
 
+    @Transactional
     public EventRequestStatusUpdateResult changeRequestStatus(Long userId, Long eventId, EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
         checkExistsEvent(eventId);
         userService.checkExistsUser(userId);
@@ -309,6 +314,7 @@ public class EventService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<EventFullDto> getEventsPublished(String text, List<Integer> categories, Boolean paid,
                                                  String rangeStart, String rangeEnd, boolean onlyAvailable,
                                                  SortEvent sort, int from, int size, HttpServletRequest request) {
@@ -373,6 +379,7 @@ public class EventService {
         return eventFullDtos;
     }
 
+    @Transactional(readOnly = true)
     public List<EventFullDto> adminSearchEvents(List<Long> users, List<StateEvent> states, List<Long> idsCategory,
                                                 String rangeStart, String rangeEnd, int from, int size) {
 

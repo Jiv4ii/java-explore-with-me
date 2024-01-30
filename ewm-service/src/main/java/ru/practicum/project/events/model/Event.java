@@ -19,7 +19,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Table(name = "iventes")
 @Component
-@Getter
 public class Event {
 
     @Id

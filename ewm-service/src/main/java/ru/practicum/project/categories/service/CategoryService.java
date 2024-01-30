@@ -35,7 +35,7 @@ public class CategoryService {
         throw new DuplicateCategoryNameException("Категория с данным именем уже существует");
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CategoryDto> getCategories(int from, int size) {
         Pageable pageable = PageRequest.of(from, size);
         Page<Category> page = repository.findAll(pageable);
@@ -46,7 +46,7 @@ public class CategoryService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CategoryDto getCategoryDtoById(Integer catId) {
         checkExistCategory(catId);
         return CategoryMapper.toCategoryDto(repository.getReferenceById(catId));
@@ -86,7 +86,6 @@ public class CategoryService {
         throw new DuplicateCategoryNameException("Категория с данным именем уже существует");
     }
 
-    @Transactional
     public void checkExistCategory(int catId) {
         if (!repository.existsById(catId)) {
             throw new CategoryNotFoundException("Категория не найдена");

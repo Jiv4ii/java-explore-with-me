@@ -10,7 +10,10 @@ import ru.practicum.project.events.model.dto.NewEventDto;
 import ru.practicum.project.events.model.location.LocationMapper;
 import ru.practicum.project.users.model.UserMapper;
 
-public class EventMapper {
+public final class EventMapper {
+
+    private EventMapper() {
+    }
 
     public static Event toEvent(NewEventDto newEventDto) {
         return Event.builder()

@@ -8,7 +8,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CompilationMapper {
+public final class CompilationMapper {
+
+    private CompilationMapper() {
+    }
 
     public static CompilationDto toCompilationDto(Compilation compilation) {
         List<EventShortDto> events = compilation.getEvents().stream()

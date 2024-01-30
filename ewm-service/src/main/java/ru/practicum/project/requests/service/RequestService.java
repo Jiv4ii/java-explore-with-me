@@ -54,7 +54,7 @@ public class RequestService {
         return RequestMapper.toRequestDto(repository.save(request));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ParticipationRequestDto> getRequests() {
         return repository.findAll()
                 .stream()
@@ -62,7 +62,7 @@ public class RequestService {
                 .collect(Collectors.toList());
     }
 
-    void checkExistRequest(Long userId, Long eventId) {
+    private void checkExistRequest(Long userId, Long eventId) {
         if (!repository.findByUserIdAndEventId(userId, eventId).isEmpty()) {
             throw new RequestAlreadyExistException("Нельзя отправлять повторные запросы");
         }
@@ -74,7 +74,7 @@ public class RequestService {
         }
     }
 
-    public void checkRequestForPost(Long userId, Long eventId) {
+    private void checkRequestForPost(Long userId, Long eventId) {
         userService.checkExistsUser(userId);
         eventService.checkExistsEvent(eventId);
         checkExistRequest(userId, eventId);
@@ -93,13 +93,13 @@ public class RequestService {
 
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public Request getRequestById(Long requestId) {
         checkExistRequest(requestId);
         return repository.getReferenceById(requestId);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ParticipationRequestDto> getUsersRequest(Long userId) {
         userService.checkExistsUser(userId);
         return repository.findByRequesterId(userId).stream()

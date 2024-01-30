@@ -73,7 +73,7 @@ public class CompilationService {
         return CompilationMapper.toCompilationDto(repository.save(compilation));
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CompilationDto> getCompilations(boolean pinned, int from, int size) {
         PageRequest page = PageRequest.of(from, size);
         return repository.findAllByPinned(pinned, page).stream()
@@ -81,7 +81,7 @@ public class CompilationService {
                 .collect(Collectors.toList());
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CompilationDto getCompilationById(long compId) {
         checkExistsCompilation(compId);
         return CompilationMapper.toCompilationDto(repository.getReferenceById(compId));

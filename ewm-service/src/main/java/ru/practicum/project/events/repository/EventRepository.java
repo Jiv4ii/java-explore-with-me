@@ -19,7 +19,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findByCategoryId(Integer categoryId);
 
     @Query("select e from Event e " +
-            "where (e.state = ?1) " +
+            "where e.state = ?1 " +
             "and ((upper(e.annotation) like upper(concat('%', ?2, '%'))) " +
             "or (upper(e.description) like upper(concat('%', ?2, '%')))) " +
             "and (e.category.id in ?3 or ?3 is null) " +

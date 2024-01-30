@@ -1,6 +1,10 @@
 package ru.practicum.project.events.model.location;
 
-public class LocationMapper {
+public final class LocationMapper {
+
+    private LocationMapper() {
+    }
+
     public static Location toLocation(LocationDto locationDto) {
         return Location.builder()
                 .lon(locationDto.getLon())

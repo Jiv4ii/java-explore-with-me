@@ -41,7 +41,7 @@ public class PrivatEventController {
     }
 
     @GetMapping("/users/{userId}/events")
-    public ResponseEntity<List<EventShortDto>> getUserEvents(@PathVariable Long userId, @RequestParam(required = false, defaultValue = "0") Integer from, @RequestParam(required = false, defaultValue = "10") Integer size) {
+    public ResponseEntity<List<EventShortDto>> getUserEvents(@PathVariable Long userId, @RequestParam(defaultValue = "0") Integer from, @RequestParam(defaultValue = "10") Integer size) {
         return new ResponseEntity<>(service.getUserEvents(userId, from, size), HttpStatus.OK);
     }
 

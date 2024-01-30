@@ -4,7 +4,10 @@ package ru.practicum.project.categories.model.dto;
 import ru.practicum.project.categories.model.Category;
 import ru.practicum.project.categories.model.dto.CategoryDto;
 
-public class CategoryMapper {
+public final class CategoryMapper {
+
+    private CategoryMapper() {
+    }
 
     public static Category toCategory(CategoryDto categoryDto) {
         return Category.builder()

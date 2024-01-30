@@ -19,8 +19,8 @@ public class PubCategoryController {
 
 
     @GetMapping("/categories")
-    public ResponseEntity<List<CategoryDto>> getCategories(@RequestParam(required = false, defaultValue = "0") Integer from,
-                                                           @RequestParam(required = false, defaultValue = "10") Integer size) {
+    public ResponseEntity<List<CategoryDto>> getCategories(@RequestParam(defaultValue = "0") Integer from,
+                                                           @RequestParam(defaultValue = "10") Integer size) {
         return new ResponseEntity<>(service.getCategories(from, size), HttpStatus.OK);
     }
 
