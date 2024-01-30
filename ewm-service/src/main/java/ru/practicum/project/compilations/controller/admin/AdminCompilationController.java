@@ -1,4 +1,4 @@
-package ru.practicum.project.compilations.controller;
+package ru.practicum.project.compilations.controller.admin;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -6,8 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.project.compilations.model.NewCompilationDto;
-import ru.practicum.project.compilations.model.UpdateCompilationRequest;
+import ru.practicum.project.compilations.model.dto.NewCompilationDto;
+import ru.practicum.project.compilations.model.dto.UpdateCompilationRequest;
 import ru.practicum.project.compilations.service.CompilationService;
 
 import javax.validation.Valid;
@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @Validated
 @Slf4j
-public class CompilationController {
+public class AdminCompilationController {
     private final CompilationService service;
 
 
@@ -41,17 +41,4 @@ public class CompilationController {
         return new ResponseEntity<>(service.updateCompilation(compId, updateCompilationRequest), HttpStatus.OK);
     }
 
-    @GetMapping("/compilations")
-    public ResponseEntity<Object> getCompilations(@RequestParam(defaultValue = "false") boolean pinned,
-                                                  @RequestParam(defaultValue = "0") int from,
-                                                  @RequestParam(defaultValue = "10") int size) {
-        log.info("Запрос подборки событий, pinned = {}, from = {}, size = {}", pinned, from, size);
-        return new ResponseEntity<>(service.getCompilations(pinned, from, size), HttpStatus.OK);
-    }
-
-    @GetMapping("/compilations/{compId}")
-    public ResponseEntity<Object> getCompilationById(@PathVariable long compId) {
-        log.info("Запрос подборки по id = {}", compId);
-        return new ResponseEntity<>(service.getCompilationById(compId), HttpStatus.OK);
-    }
 }

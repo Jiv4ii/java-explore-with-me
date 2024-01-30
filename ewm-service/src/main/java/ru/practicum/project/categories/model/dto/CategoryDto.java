@@ -1,4 +1,4 @@
-package ru.practicum.project.categories.model;
+package ru.practicum.project.categories.model.dto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

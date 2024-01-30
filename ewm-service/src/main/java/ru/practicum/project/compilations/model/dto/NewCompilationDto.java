@@ -1,4 +1,4 @@
-package ru.practicum.project.compilations.model;
+package ru.practicum.project.compilations.model.dto;
 
 import javax.validation.constraints.*;
 

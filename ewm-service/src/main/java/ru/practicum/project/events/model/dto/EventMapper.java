@@ -1,8 +1,9 @@
-package ru.practicum.project.events.model;
+package ru.practicum.project.events.model.dto;
 
 
-import ru.practicum.project.categories.model.CategoryMapper;
+import ru.practicum.project.categories.model.dto.CategoryMapper;
 import ru.practicum.project.constants.Constants;
+import ru.practicum.project.events.model.Event;
 import ru.practicum.project.events.model.dto.EventFullDto;
 import ru.practicum.project.events.model.dto.EventShortDto;
 import ru.practicum.project.events.model.dto.NewEventDto;

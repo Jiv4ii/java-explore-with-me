@@ -1,6 +1,7 @@
-package ru.practicum.project.compilations.model;
+package ru.practicum.project.compilations.model.dto;
 
-import ru.practicum.project.events.model.EventMapper;
+import ru.practicum.project.compilations.model.Compilation;
+import ru.practicum.project.events.model.dto.EventMapper;
 import ru.practicum.project.events.model.dto.EventShortDto;
 
 import java.util.List;

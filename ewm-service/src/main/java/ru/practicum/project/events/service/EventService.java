@@ -16,7 +16,7 @@ import ru.practicum.dto.StatDto;
 import ru.practicum.project.categories.model.Category;
 import ru.practicum.project.categories.service.CategoryService;
 import ru.practicum.project.constants.Constants;
-import ru.practicum.project.events.model.EventMapper;
+import ru.practicum.project.events.model.dto.EventMapper;
 import ru.practicum.project.events.model.StateAction;
 import ru.practicum.project.events.model.StateEvent;
 import ru.practicum.project.events.model.dto.*;

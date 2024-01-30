@@ -1,5 +1,8 @@
-package ru.practicum.project.categories.model;
+package ru.practicum.project.categories.model.dto;
 
+
+import ru.practicum.project.categories.model.Category;
+import ru.practicum.project.categories.model.dto.CategoryDto;
 
 public class CategoryMapper {
 
