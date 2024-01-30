@@ -2,15 +2,14 @@ package ru.practicum.project.controller;
 
 
 import com.sun.istack.NotNull;
-import org.springframework.http.HttpStatus;
-import ru.practicum.dto.HitDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import ru.practicum.dto.HitDto;
 import ru.practicum.dto.StatDto;
-import ru.practicum.project.model.Hit;
 import ru.practicum.project.service.HitService;
 
 import java.util.List;
