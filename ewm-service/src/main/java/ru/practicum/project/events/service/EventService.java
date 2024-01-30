@@ -279,7 +279,7 @@ public class EventService {
                 requestStatus = RequestStatus.REJECTED;
             }
             request.setStatus(requestStatus);
-            if (request.getStatus() == RequestStatus.CONFIRMED){
+            if (request.getStatus() == RequestStatus.CONFIRMED) {
                 confirmed.add(RequestMapper.toRequestDto(request));
             } else {
                 rejected.add(RequestMapper.toRequestDto(request));
