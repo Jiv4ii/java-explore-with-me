@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class NewEventDto {
     @NotBlank
-    @Size(min = 20, max = 2001, message = "Длина аннотации должна быть в диапазоне 20-2000.")
+    @Size(min = 20, max = 2000, message = "Длина аннотации должна быть в диапазоне 20-2000.")
     private String annotation;
 
     @NotNull
@@ -29,7 +29,7 @@ public class NewEventDto {
     private Integer category;
 
     @NotBlank
-    @Size(min = 20, max = 7001, message = "Длина описании должна быть в диапазоне 20-7000.")
+    @Size(min = 20, max = 7000, message = "Длина описании должна быть в диапазоне 20-7000.")
     private String description;
 
     @NotNull
@@ -47,7 +47,7 @@ public class NewEventDto {
     private boolean requestModeration = true;
 
     @NotBlank
-    @Size(min = 3, max = 121, message = "Длина аннотации должна быть в диапазоне 3-120.")
+    @Size(min = 3, max = 120, message = "Длина аннотации должна быть в диапазоне 3-120.")
     private String title;
 
 }

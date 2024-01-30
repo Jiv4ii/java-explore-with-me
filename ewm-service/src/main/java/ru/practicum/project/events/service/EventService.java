@@ -254,16 +254,18 @@ public class EventService {
         return EventMapper.toEventFullDto(repository.getReferenceById(eventId));
     }
 
-    public List<ParticipationRequestDto> changeRequestStatus(Long userId, Long eventId, EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
+    public EventRequestStatusUpdateResult changeRequestStatus(Long userId, Long eventId, EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
         checkExistsEvent(eventId);
         userService.checkExistsUser(userId);
         Event event = getEventById(eventId);
         RequestStatus requestStatus = eventRequestStatusUpdateRequest.getStatus();
+        List<ParticipationRequestDto> rejected = new ArrayList<>();
+        List<ParticipationRequestDto> confirmed = new ArrayList<>();
         if (event.getInitiator().getId() != userId) {
             throw new UserNotCreatorExcepion("Пользователь не является создателем события");
         }
         if (event.getParticipantLimit() == 0 || event.isRequestModeration() == false) {
-            return new ArrayList<>();
+            return null;
         }
         if (event.getParticipantLimit() == event.getConfirmedRequests()) {
             throw new MaxLimitException("Событие заполненно");
@@ -271,12 +273,18 @@ public class EventService {
         List<Request> requests = requestRepository.findAllById(eventRequestStatusUpdateRequest.getRequestIds());
         for (Request request : requests) {
             if (request.getStatus() != RequestStatus.PENDING) {
-                throw new RequestWrongStatusException("Статус запроса должен в состоянии PENDING");
+                throw new RequestWrongStatusException("Статус запроса должен быть в состоянии PENDING");
             }
             if (event.getConfirmedRequests() == event.getParticipantLimit()) {
-                requestStatus = RequestStatus.CANCELED;
+                requestStatus = RequestStatus.REJECTED;
             }
             request.setStatus(requestStatus);
+            if (request.getStatus() == RequestStatus.CONFIRMED){
+                confirmed.add(RequestMapper.toRequestDto(request));
+            } else {
+                rejected.add(RequestMapper.toRequestDto(request));
+            }
+
             if (requestStatus == RequestStatus.CONFIRMED) {
                 event.setConfirmedRequests(event.getConfirmedRequests() + 1);
                 repository.save(event);
@@ -284,9 +292,10 @@ public class EventService {
             requestRepository.save(request);
 
         }
-        return requests.stream()
-                .map(RequestMapper::toRequestDto)
-                .collect(Collectors.toList());
+        EventRequestStatusUpdateResult eventRequestStatusUpdateResult = new EventRequestStatusUpdateResult();
+        eventRequestStatusUpdateResult.setConfirmedRequests(confirmed);
+        eventRequestStatusUpdateResult.setRejectedRequests(rejected);
+        return eventRequestStatusUpdateResult;
     }
 
     public List<ParticipationRequestDto> getEventRequests(Long userId, Long eventId) {

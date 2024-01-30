@@ -10,6 +10,7 @@ import ru.practicum.project.events.model.dto.*;
 import ru.practicum.project.events.model.SortEvent;
 import ru.practicum.project.events.service.EventService;
 import ru.practicum.project.requests.model.EventRequestStatusUpdateRequest;
+import ru.practicum.project.requests.model.EventRequestStatusUpdateResult;
 import ru.practicum.project.requests.model.ParticipationRequestDto;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,7 +62,7 @@ public class EventController {
     }
 
     @PatchMapping("/users/{userId}/events/{eventId}/requests")
-    public ResponseEntity<List<ParticipationRequestDto>> changeRequestStatus(@PathVariable Long userId, @PathVariable Long eventId, @RequestBody @Valid EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
+    public ResponseEntity<EventRequestStatusUpdateResult> changeRequestStatus(@PathVariable Long userId, @PathVariable Long eventId, @RequestBody @Valid EventRequestStatusUpdateRequest eventRequestStatusUpdateRequest) {
         return new ResponseEntity<>(service.changeRequestStatus(userId, eventId, eventRequestStatusUpdateRequest), HttpStatus.OK);
     }
 
