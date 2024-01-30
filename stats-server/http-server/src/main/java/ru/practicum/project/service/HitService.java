@@ -5,11 +5,10 @@ import org.springframework.stereotype.Service;
 import ru.practicum.project.constants.Constants;
 import ru.practicum.dto.HitDto;
 import ru.practicum.dto.StatDto;
+import ru.practicum.project.exceptions.DateTimeException;
 import ru.practicum.project.mapper.HitMapper;
-import ru.practicum.project.model.Hit;
 import ru.practicum.project.repository.HitRepository;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,9 +21,6 @@ public class HitService {
         return HitMapper.toHitDto(repository.save(HitMapper.toHit(hitDto)));
     }
 
-    public List<Hit> getHit() {
-        return repository.findAll();
-    }
 
     public List<StatDto> getStats(String strStart, String strEnd, List<String> uris, Boolean unique) {
         LocalDateTime start = parseDataTime(strStart);

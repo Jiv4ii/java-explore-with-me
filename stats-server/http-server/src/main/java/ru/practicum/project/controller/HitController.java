@@ -24,15 +24,10 @@ public class HitController {
 
     @PostMapping("/hit")
     private ResponseEntity<Object> postHit(@Validated @RequestBody HitDto hitDto) {
-        service.createHit(hitDto);
         log.info("Обращение к методу postHit");
         return new ResponseEntity<>(service.createHit(hitDto), HttpStatus.CREATED);
     }
 
-    @GetMapping("/hit")
-    private List<Hit> postHit() {
-        return service.getHit();
-    }
 
     @GetMapping("/stats")
     public ResponseEntity<List<StatDto>> getHit(@RequestParam @NotNull String start,
