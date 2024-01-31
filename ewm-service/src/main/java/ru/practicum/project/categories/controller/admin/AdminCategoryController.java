@@ -22,6 +22,7 @@ public class AdminCategoryController {
     public ResponseEntity<Category> postCategory(@RequestBody @Valid CategoryDto categoryDto) {
         return new ResponseEntity<>(service.createCategory(categoryDto), HttpStatus.CREATED);
     }
+
     @DeleteMapping("/admin/categories/{catId}")
     public ResponseEntity<Object> deleteCategory(@PathVariable Integer catId) {
         service.deleteCategoryrById(catId);
