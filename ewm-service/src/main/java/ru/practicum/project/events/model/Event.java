@@ -3,13 +3,10 @@ package ru.practicum.project.events.model;
 import lombok.*;
 import org.springframework.stereotype.Component;
 import ru.practicum.project.categories.model.Category;
-import ru.practicum.project.events.model.StateEvent;
 import ru.practicum.project.events.model.location.Location;
 import ru.practicum.project.users.model.User;
 
 import javax.persistence.*;
-
-
 import java.time.LocalDateTime;
 
 @Entity
@@ -76,5 +73,6 @@ public class Event {
 
     @Column
     private int views;
+
 
 }

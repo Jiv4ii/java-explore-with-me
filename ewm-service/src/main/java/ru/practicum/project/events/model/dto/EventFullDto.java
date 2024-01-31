@@ -1,6 +1,9 @@
 package ru.practicum.project.events.model.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.practicum.project.categories.model.dto.CategoryDto;
 import ru.practicum.project.events.model.StateEvent;
 import ru.practicum.project.events.model.location.LocationDto;
@@ -44,4 +47,5 @@ public class EventFullDto {
     private StateEvent state;
 
     private int views;
+
 }
