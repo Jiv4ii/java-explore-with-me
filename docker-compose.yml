@@ -33,12 +33,14 @@ services:
       - "8080:8080"
     depends_on:
       - ewm-db
+      - stats-server
     environment:
       - DB_EWM=serverEwm
       - DB_HOST_EWM=ewm-db
       - DB_PORT=5432
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=user
+      - STATS.URI=http://stats-server:9090
 
   ewm-db:
     image: postgres:14-alpine
@@ -48,6 +50,6 @@ services:
     volumes:
       - /var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=serverEvm
+      - POSTGRES_DB=serverEwm
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=user
