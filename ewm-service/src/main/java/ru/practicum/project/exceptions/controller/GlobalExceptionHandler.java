@@ -18,7 +18,8 @@ public class GlobalExceptionHandler {
             EventNotFoundException.class,
             CategoryNotFoundException.class,
             ClosedEventGetException.class,
-            CompilationNotFoundException.class})
+            CompilationNotFoundException.class,
+            CommentNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Map<String, String> handleNotFound(final Exception e) {
         log.info(e.getMessage());
